@@ -92,6 +92,64 @@ function App() {
           body.dark .header-line {
             background-color: #4b5563;
           }
+
+          .country-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+          }
+
+          .country-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(6px);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: auto;
+          }
+
+          .country-card.dark {
+            background: rgba(31, 41, 55, 0.6);
+          }
+
+          .country-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+          }
+
+          .country-card h2 {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+          }
+
+          .country-card p {
+            margin: 4px 0;
+            font-size: 0.9rem;
+          }
+
+          .fav-btn {
+            margin-top: 10px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 20px;
+            background-color: #ef4444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            align-self: flex-start;
+          }
+
+          .fav-btn:hover {
+            background-color: #dc2626;
+          }
         `}
       </style>
       <header className="header" style={{ color: darkMode ? '#ffffff' : '#000000' }}>
