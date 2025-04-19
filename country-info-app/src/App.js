@@ -47,50 +47,31 @@ function App() {
         : 'radial-gradient(circle at top left, #e0f7fa, #ffffff, #e0f7fa)',
       backdropFilter: 'blur(6px)',
       minHeight: '100vh',
+      color: darkMode ? '#f3f4f6' : '#1f2937'
     }}>
       <style>
         {`
-          .animated-btn.round-btn {
+          .country-card p,
+          .country-card h2,
+          .country-card strong {
+            color: inherit;
+          }
+
+          .fav-btn {
+            margin-top: auto;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 20px;
+            background-color: #ef4444;
+            color: #fff;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            background: linear-gradient(145deg, #3b82f6, #60a5fa);
-            color: white;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            align-self: flex-start;
+            transition: background 0.3s ease;
           }
 
-          .animated-btn.round-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-          }
-
-          .footer {
-            text-align: center;
-            padding: 20px;
-            color: #ffffff;
-            font-weight: bold;
-          }
-
-          body.dark .footer {
-            color: #f3f4f6;
-          }
-
-          body:not(.dark) .footer {
-            color: #1f2937;
-          }
-
-          .header-line {
-            width: 80%;
-            margin: 10px auto 20px;
-            height: 2px;
-            background-color: #ccc;
-          }
-
-          body.dark .header-line {
-            background-color: #4b5563;
+          .fav-btn:hover {
+            background-color: #dc2626;
           }
 
           .country-list {
@@ -103,14 +84,16 @@ function App() {
           .country-card {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: space-between;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(6px);
             border-radius: 12px;
             padding: 16px;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            height: auto;
+            min-height: 420px;
+            max-width: 360px;
+            margin: auto;
           }
 
           .country-card.dark {
@@ -135,23 +118,43 @@ function App() {
             font-size: 0.9rem;
           }
 
-          .fav-btn {
-            margin-top: 10px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            border-radius: 20px;
-            background-color: #ef4444;
-            color: #fff;
+          .animated-btn.round-btn {
             border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #3b82f6, #60a5fa);
+            color: white;
+            font-weight: bold;
             cursor: pointer;
-            align-self: flex-start;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
           }
 
-          .fav-btn:hover {
-            background-color: #dc2626;
+          .animated-btn.round-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          }
+
+          .header-line {
+            width: 80%;
+            margin: 10px auto 20px;
+            height: 2px;
+            background-color: #ccc;
+          }
+
+          body.dark .header-line {
+            background-color: #4b5563;
+          }
+
+          .footer {
+            text-align: center;
+            padding: 20px;
+            font-weight: bold;
+            color: inherit;
           }
         `}
       </style>
+
       <header className="header" style={{ color: darkMode ? '#ffffff' : '#000000' }}>
         <h1>🌍 Country Info Explorer</h1>
         <div className="header-line"></div>
@@ -163,9 +166,19 @@ function App() {
         />
 
         <div className="feature-buttons" style={{ marginTop: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <button className="animated-btn round-btn" onClick={() => setDarkMode(!darkMode)}>🌙 {darkMode ? 'Light Mode' : 'Dark Mode'}</button>
-          <button className="animated-btn round-btn" onClick={() => setRegionFilter('All')}>📌 Reset Region</button>
-          <button className="animated-btn round-btn" onClick={() => setShowFavorites(!showFavorites)}>⭐ {showFavorites ? 'Show All' : 'Show Favorites'}</button>
+          <button className="animated-btn round-btn" onClick={() => setDarkMode(!darkMode)}>
+            🌙 {darkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
+          <button className="animated-btn round-btn" onClick={() => {
+            setRegionFilter('All');
+            setSearchTerm('');
+            setShowFavorites(false);
+          }}>
+            📌 Reset Region
+          </button>
+          <button className="animated-btn round-btn" onClick={() => setShowFavorites(!showFavorites)}>
+            ⭐ {showFavorites ? 'Show All' : 'Show Favorites'}
+          </button>
         </div>
 
         <div className="region-filters" style={{ marginTop: '15px', display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
